@@ -14,14 +14,14 @@ import java.io.Serializable;
 public class Movie implements Serializable {
 
     private Long id;
-    private String title;
-    private String author;
+    private String name;
+    private String producer;
     private Person person;
 
     public Movie(Long id, String title, String author) {
         this.id = id;
-        this.title = title;
-        this.author = author;
+        this.name = title;
+        this.producer = author;
     }
 
     public Long getId() {
@@ -33,19 +33,19 @@ public class Movie implements Serializable {
     }
 
     public String getTitle() {
-        return title;
+        return name;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.name = title;
     }
 
     public String getAuthor() {
-        return author;
+        return producer;
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        this.producer = author;
     }
 
     public Person getPerson() {
