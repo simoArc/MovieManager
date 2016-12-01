@@ -20,7 +20,7 @@ public class Person implements Serializable{
     private String firstName;
     private String lastName;
     
-    private Map<String, Movie> movies;
+    private Map<Long, Movie> movies;
 
     public Person(Long id, String firstName, String lastName) {
         this.id = id;
@@ -54,11 +54,11 @@ public class Person implements Serializable{
         this.lastName = lastName;
     }
 
-    public Map<String, Movie> getMovies() {
+    public Map<Long, Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(Map<String, Movie> movies) {
+    public void setMovies(Map<Long, Movie> movies) {
         this.movies = movies;
     }
     
@@ -67,14 +67,18 @@ public class Person implements Serializable{
     }*/
     
     //id passée en paramètre url
-    public Movie getMovieById(String id){
+    public Movie getMovieById(Long id){
         return movies.get(id);
         
     }
 
     public void addMovie(Movie movie) {
-        this.movies.put(movie.getTitle(), movie);
+        this.movies.put(movie.getId(), movie);
         
+    }
+
+    public void removeMovie(Movie movie) {
+        this.movies.remove(movie.getId());
     }
     
     
