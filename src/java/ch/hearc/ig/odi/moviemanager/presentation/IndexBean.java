@@ -5,12 +5,17 @@
  */
 package ch.hearc.ig.odi.moviemanager.presentation;
 
+import ch.hearc.ig.odi.moviemanager.business.Movie;
 import ch.hearc.ig.odi.moviemanager.business.Person;
+import ch.hearc.ig.odi.moviemanager.exception.InvalidParameterException;
+import ch.hearc.ig.odi.moviemanager.exception.NullParameterException;
 import ch.hearc.ig.odi.moviemanager.service.Services;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -32,16 +37,15 @@ public class IndexBean implements Serializable {
     private Long personId;
 
     public IndexBean() {
-        
-    }
-    
-    public void initList(){
-        this.people = service.getPeople();
+
     }
 
-   /* public List getPeopleList() {
-        return service.getPeopleList();
-    }*/
+    /**
+     * Initialisation de la liste avec toutes les personnes existentes
+     */
+    public void initList() {
+        this.people = service.getPeople();
+    }
 
     public Person getPerson() {
         return person;
@@ -57,13 +61,17 @@ public class IndexBean implements Serializable {
 
     public void setPersonId(Long personId) {
         this.personId = personId;
+        person = service.getPersonWithId(personId);
     }
 
     public List getMoviesList() {
         return service.getMoviesList();
     }
 
-        public void initPerson() {
+    /**
+     * Initialisation de l'id passé en paramètre url avec l'id de la personne concernée
+     */
+    public void initPerson() {
         String idParam = FacesContext
                 .getCurrentInstance()
                 .getExternalContext()
@@ -73,9 +81,19 @@ public class IndexBean implements Serializable {
             person = service.getPersonWithId(personId);
         }
     }
-        
+
     public ArrayList<Map.Entry<Long, Person>> getPeople() {
         ArrayList<Map.Entry<Long, Person>> list = new ArrayList<>(people.entrySet());
         return list;
+    }
+    
+    public void removeMovie(Movie movie){
+        try {
+            service.removeMovieFromPerson(person, movie);
+        } catch (NullParameterException ex) {
+            Logger.getLogger(IndexBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidParameterException ex) {
+            Logger.getLogger(IndexBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -31,13 +31,17 @@
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.listFName']}" />
                             </f:facet>
-                            <h:commandLink value="#{person.value.firstName}" action="#{personDetailsBean.showPerson(person)}" />
+                            <h:link outcome="/Person/edit.xhtml" value="#{person.value.firstName}">
+                                <f:param name="id" value="#{person.key}"/>
+                            </h:link>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.listName']}" />
                             </f:facet>
-                            <h:commandLink value="#{person.value.lastName}" action="#{personDetailsBean.showPerson(person)}" />
+                            <h:link outcome="/Person/edit.xhtml" value="#{person.value.lastName}">
+                                <f:param name="id" value="#{person.key}"/>
+                            </h:link>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

@@ -54,9 +54,6 @@ public class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    public void setMovies(Map<Long, Movie> movies) {
-        this.movies = movies;
-    }
 
     //id passée en paramètre url
     public Movie getMovieById(Long id) {
