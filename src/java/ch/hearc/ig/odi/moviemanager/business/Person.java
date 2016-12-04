@@ -14,19 +14,19 @@ import java.util.Map;
  *
  * @author Simone Bissolotti
  */
-public class Person implements Serializable{
-    
+public class Person implements Serializable {
+
     private Long id;
     private String firstName;
     private String lastName;
-    
+
     private Map<Long, Movie> movies;
 
     public Person(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        
+
         movies = new HashMap();
     }
 
@@ -54,33 +54,26 @@ public class Person implements Serializable{
         this.lastName = lastName;
     }
 
-    public Map<Long, Movie> getMovies() {
-        return movies;
-    }
-
     public void setMovies(Map<Long, Movie> movies) {
         this.movies = movies;
     }
-    
-/*    public ArrayList<Map.Entry<String, Movie>> getMovies() {
-        return new ArrayList<>(movies.entrySet());
-    }*/
-    
+
     //id passée en paramètre url
-    public Movie getMovieById(Long id){
+    public Movie getMovieById(Long id) {
         return movies.get(id);
-        
+
     }
 
     public void addMovie(Movie movie) {
         this.movies.put(movie.getId(), movie);
-        
+
     }
 
     public void removeMovie(Movie movie) {
         this.movies.remove(movie.getId());
     }
-    
-    
-    
+
+    public ArrayList<Map.Entry<Long, Movie>> getMovies() {
+        return new ArrayList<>(movies.entrySet());
+    }
 }

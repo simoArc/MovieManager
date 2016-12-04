@@ -2,16 +2,88 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
+    <f:metadata>
+        <f:viewAction action="#{indexBean.initList()}"></f:viewAction>
+    </f:metadata>
     <h:body>
-       <ui:composition template="/templates/newTemplate.xhtml">
-            <ui:define name="top">dh</ui:define>    
-           
-            <ui:define name="content">ghhhv</ui:define>
-       </ui:composition>
+        <ui:composition template="/templates/newTemplate.xhtml">
+            <ui:define name="top">#{msg['page1.home']}</ui:define>    
+
+            <ui:define name="content">
+                <h2>#{msg['page1.listTitle']}</h2>
+
+                <h:form>
+                    <h:dataTable var="person" value="#{indexBean.people}">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['page1.listId']}" />
+                            </f:facet>
+                            <h:link outcome="/Person/edit.xhtml" value="#{person.key}">
+                                <f:param name="id" value="#{person.key}"/>
+                            </h:link>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['page1.listFName']}" />
+                            </f:facet>
+                            <h:commandLink value="#{person.value.firstName}" action="#{personDetailsBean.showPerson(person)}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['page1.listName']}" />
+                            </f:facet>
+                            <h:commandLink value="#{person.value.lastName}" action="#{personDetailsBean.showPerson(person)}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['page1.listNb']}" />
+                            </f:facet>
+                            <h:outputText value="#{person.value.movies.size()}" />
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:commandButton value="#{msg['button.label.add']}" action="createPerson" />
+                </h:form>
+
+                <h2>#{msg['page1.movies.title']}</h2>
+                <h:form>
+                    <h:dataTable var="movie" value="#{indexBean.moviesList}">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['page1.listId']}" />
+                            </f:facet>
+                            <h:outputText value="#{movie.id}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['page1.movie.name']}" />
+                            </f:facet>
+                            <h:commandLink value="#{movie.name}" action="k" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['page1.movie.producer']}" />
+                            </f:facet>
+                            <h:outputText value="#{movie.producer}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['page1.movie.people.size']}" />
+                            </f:facet>
+                            <h:outputText value="#{movie.people.size()}" />
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:commandButton value="#{msg['button.label.add']}" action="createMovie" />
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

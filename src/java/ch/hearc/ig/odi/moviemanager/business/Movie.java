@@ -6,6 +6,9 @@
 package ch.hearc.ig.odi.moviemanager.business;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  *
@@ -16,12 +19,15 @@ public class Movie implements Serializable {
     private Long id;
     private String name;
     private String producer;
-    private Person person;
+
+    private Map<Long, Person> people;
 
     public Movie(Long id, String title, String author) {
         this.id = id;
         this.name = title;
         this.producer = author;
+        
+        people = new HashMap();
     }
 
     public Long getId() {
@@ -32,30 +38,30 @@ public class Movie implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getName() {
         return name;
     }
 
-    public void setTitle(String title) {
+    public void setName(String title) {
         this.name = title;
     }
 
-    public String getAuthor() {
+    public String getProducer() {
         return producer;
     }
 
-    public void setAuthor(String author) {
-        this.producer = author;
+    public void setProducer(String producer) {
+        this.producer = producer;
     }
 
-    public Person getPerson() {
-        return person;
+    public Map<Long, Person> getPeople() {
+        return people;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPeople(Map<Long, Person> people) {
+        this.people = people;
     }
-
     
     
+
 }
