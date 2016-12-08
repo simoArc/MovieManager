@@ -3,68 +3,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    
     <f:metadata>
         <f:viewParam name="id" value="#{indexBean.personId}"/>
         <f:viewAction action="#{indexBean.initPerson()}"></f:viewAction>
     </f:metadata>
-
-      <h:body>
+    <h:body>
+        <!--Ajout personne-->
         <ui:composition template="/templates/newTemplate.xhtml">
-            <ui:define name="top">#{msg['pageEP.title']}</ui:define>    
-           
+            <ui:define name="top">#{msg['pageEP.addPers']}</ui:define>    
             <ui:define name="content">
-
-                <h:panelGrid border="0" columns="2">
-                    <h:outputLabel value="#{msg['page1.listId']} : " />
-                    <h:outputText value="#{indexBean.person.id}" />
-                    <h:outputLabel value="#{msg['page1.listFName']} : " />
-                    <h:outputText value="#{indexBean.person.firstName}" />
-                    <h:outputLabel value="#{msg['page1.listName']} : " />
-                    <h:outputText value="#{indexBean.person.lastName}" />
-                </h:panelGrid>
-
-                <h3>
-                    <h:outputText value="#{msg['pageEP.title']}" />
-                </h3>
-
-                <h:form>
-                    <h:dataTable var="movie" value="#{indexBean.person.movies}">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{msg['page1.listId']}" />
-                            </f:facet>
-                            <h:outputText value="#{movie.value.id}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{msg['page1.movie.name']}" />
-                            </f:facet>
-                            <h:link outcome="/Movie/edit.xhtml" value="#{movie.value.name}">
-                                <f:param name="id" value="#{movie.key}"/>
-                            </h:link>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{msg['page1.movie.producer']}" />
-                            </f:facet>
-                            <h:outputText value="#{movie.value.producer}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;" />
-                            </f:facet>
-                            &nbsp;<h:commandLink action="#{indexBean.removeMovie(movie)}"><h:graphicImage url="/resources/images/delete.png" width="24px"/></h:commandLink>
-                        </h:column>
-                    </h:dataTable>
+                <h:form rendered="#{indexBean.personId == null}">
+                    <h:panelGrid border="0" columns="2">
+                        <h:outputLabel value="#{msg['page1.listFName']} : " />
+                        <h:inputText value="#{indexBean.person.firstName}"/>
+                        <h:outputLabel value="#{msg['page1.listName']} : " />
+                        <h:inputText value="#{indexBean.person.lastName}" />
+                    </h:panelGrid>
+                    <h:commandButton action="k" value="#{msg['pageEP.validate']}"/>
                 </h:form>
 
-                <br/>
+                <!--Modification personne-->
+                <h:form rendered="#{indexBean.personId != null}">
+                    <h:panelGrid border="0" columns="2">
+                        <h:outputLabel value="#{msg['page1.listId']} : " />
+                        <h:outputText value="#{indexBean.person.id}" />
+                        <h:outputLabel value="#{msg['page1.listFName']} : " />
+                        <h:inputText value="#{indexBean.person.firstName}"/>
+                        <h:outputLabel value="#{msg['page1.listName']} : " />
+                        <h:inputText value="#{indexBean.person.lastName}" />
+                    </h:panelGrid>
+                    <h:commandButton action="k" value="#{msg['pageEP.validate']}"/>
+                </h:form>
 
-                
             </ui:define>
         </ui:composition>
+
+
+
     </h:body>
 </html>
 

@@ -23,7 +23,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.listId']}" />
                             </f:facet>
-                            <h:link outcome="/Person/edit.xhtml" value="#{person.key}">
+                            <h:link outcome="/Person/details.xhtml" value="#{person.key}">
                                 <f:param name="id" value="#{person.key}"/>
                             </h:link>
                         </h:column>
@@ -31,7 +31,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.listFName']}" />
                             </f:facet>
-                            <h:link outcome="/Person/edit.xhtml" value="#{person.value.firstName}">
+                            <h:link outcome="/Person/details.xhtml" value="#{person.value.firstName}">
                                 <f:param name="id" value="#{person.key}"/>
                             </h:link>
                         </h:column>
@@ -39,7 +39,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.listName']}" />
                             </f:facet>
-                            <h:link outcome="/Person/edit.xhtml" value="#{person.value.lastName}">
+                            <h:link outcome="/Person/details.xhtml" value="#{person.value.lastName}">
                                 <f:param name="id" value="#{person.key}"/>
                             </h:link>
                         </h:column>
