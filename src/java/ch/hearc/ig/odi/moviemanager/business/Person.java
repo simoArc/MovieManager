@@ -30,6 +30,10 @@ public class Person implements Serializable {
         movies = new HashMap();
     }
 
+    public Person() {
+        movies = new HashMap();
+    }
+
     public Long getId() {
         return id;
     }
@@ -53,7 +57,6 @@ public class Person implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
 
     //id passée en paramètre url
     public Movie getMovieById(Long id) {

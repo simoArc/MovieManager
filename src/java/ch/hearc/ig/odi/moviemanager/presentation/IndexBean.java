@@ -95,6 +95,8 @@ public class IndexBean implements Serializable {
         if (!(idParam == null || idParam.isEmpty())) {
             personId = new Long(idParam);
             person = service.getPersonWithId(personId);
+        }else{
+            person = new Person();
         }
     }
 

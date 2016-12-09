@@ -71,10 +71,7 @@
 
                     <h:commandButton action="#{indexBean.addMovie()}" value="#{msg['button.label.add']}" />
                     <br/>
-                    <h:commandButton value="#{msg['pageEP.invalidate']}" action="/index.xhtml" immediate="true" />
-
-
-
+                    <h:commandButton value="#{msg['pageEP.invalidate']}" action="/index.xhtml?faces-redirect=true" immediate="true" />
 
                 </h:form>
 
