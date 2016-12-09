@@ -57,6 +57,10 @@ public class Movie implements Serializable {
     public void addPerson(Person person){
         this.people.put(person.getId(), person);
     }
+    
+    public void removePerson(Person person){
+         this.people.remove(person.getId(), person);
+    }
     /*public Map<Long, Person> getPeople() {
         return people;
     }*/

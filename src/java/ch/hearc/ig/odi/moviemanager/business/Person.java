@@ -69,7 +69,7 @@ public class Person implements Serializable {
 
     public void removeMovie(Movie movie) {
         this.movies.remove(movie.getId(), movie);
-        
+        movie.removePerson(this);
     }
 
     public ArrayList<Map.Entry<Long, Movie>> getMovies() {

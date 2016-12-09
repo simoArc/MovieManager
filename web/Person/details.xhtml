@@ -59,7 +59,7 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;" />
                             </f:facet>
-                            &nbsp;<h:commandLink action="#{indexBean.removeMovie(indexBean.person, movie)}"><h:graphicImage url="/resources/images/delete.png" width="24px"/></h:commandLink>
+                            &nbsp;<h:commandLink action="#{indexBean.removeMovie(indexBean.person, movie.value)}"><h:graphicImage url="/resources/images/delete.png" width="24px"/></h:commandLink>
                         </h:column>
                     </h:dataTable>
                 </h:form>
