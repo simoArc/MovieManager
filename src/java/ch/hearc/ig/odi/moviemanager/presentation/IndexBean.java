@@ -33,6 +33,7 @@ public class IndexBean implements Serializable {
     Services service;
 
     private Map<Long, Person> people;
+    private Map<Long, Movie> movies;
     private Person person;
     private Long personId;
 
@@ -45,6 +46,7 @@ public class IndexBean implements Serializable {
      */
     public void initList() {
         this.people = service.getPeople();
+        this.movies = service.getMovies();
     }
 
     public Person getPerson() {
@@ -64,8 +66,12 @@ public class IndexBean implements Serializable {
         person = service.getPersonWithId(personId);
     }
 
-    public List getMoviesList() {
+   /* public List<Movie> getMoviesList() {
         return service.getMoviesList();
+    }*/
+        public ArrayList<Map.Entry<Long, Movie>> getMovies() {
+        ArrayList<Map.Entry<Long, Movie>> list = new ArrayList<>(movies.entrySet());
+        return list;
     }
 
     /**
@@ -87,13 +93,17 @@ public class IndexBean implements Serializable {
         return list;
     }
     
-    public void removeMovie(Movie movie){
+    public void removeMovie(Person person, Movie movie){
         try {
             service.removeMovieFromPerson(person, movie);
-        } catch (NullParameterException ex) {
-            Logger.getLogger(IndexBean.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidParameterException ex) {
+        } catch (NullParameterException | InvalidParameterException ex) {
             Logger.getLogger(IndexBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String save(Person person) throws NullParameterException{
+        service.savePerson(person);
+        return "/index.xhtml?faces-redirect=true";
+        
     }
 }

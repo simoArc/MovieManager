@@ -28,7 +28,7 @@
                     <h:commandButton  action="edit.xhtml?faces-redirect=true&amp;includeViewParams=true" value="#{msg['pageEP.Edit']}">
                         <f:param name="id" value="#{indexBean.personId}"/>
                     </h:commandButton>
-                     <h:commandButton  action="edit.xhtml?faces-redirect=true" value="ajouter"/>
+
                     <h3>
                         <h:outputText value="#{msg['pageEP.title']}" />
                     </h3>
@@ -45,7 +45,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.movie.name']}" />
                             </f:facet>
-                            <h:link outcome="/Movie/edit.xhtml" value="#{movie.value.name}">
+                            <h:link outcome="/Movie/details.xhtml" value="#{movie.value.name}">
                                 <f:param name="id" value="#{movie.key}"/>
                             </h:link>
                         </h:column>
@@ -59,7 +59,7 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;" />
                             </f:facet>
-                            &nbsp;<h:commandLink action="#{indexBean.removeMovie(movie)}"><h:graphicImage url="/resources/images/delete.png" width="24px"/></h:commandLink>
+                            &nbsp;<h:commandLink action="#{indexBean.removeMovie(indexBean.person, movie)}"><h:graphicImage url="/resources/images/delete.png" width="24px"/></h:commandLink>
                         </h:column>
                     </h:dataTable>
                 </h:form>

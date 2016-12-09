@@ -63,11 +63,13 @@ public class Person implements Serializable {
 
     public void addMovie(Movie movie) {
         this.movies.put(movie.getId(), movie);
+        movie.addPerson(this);
 
     }
 
     public void removeMovie(Movie movie) {
-        this.movies.remove(movie.getId());
+        this.movies.remove(movie.getId(), movie);
+        
     }
 
     public ArrayList<Map.Entry<Long, Movie>> getMovies() {

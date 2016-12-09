@@ -51,39 +51,40 @@
                         </h:column>
                     </h:dataTable>
 
-                    <h:commandButton value="#{msg['button.label.add']}" action="createPerson" />
+                    <h:commandButton  action="/Person/edit.xhtml?faces-redirect=true" value="#{msg['button.label.add']}"/>
+
                 </h:form>
 
                 <h2>#{msg['page1.movies.title']}</h2>
                 <h:form>
-                    <h:dataTable var="movie" value="#{indexBean.moviesList}">
+                    <h:dataTable var="movie" value="#{indexBean.movies}">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.listId']}" />
                             </f:facet>
-                            <h:outputText value="#{movie.id}" />
+                            <h:outputText value="#{movie.key}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.movie.name']}" />
                             </f:facet>
-                            <h:commandLink value="#{movie.name}" action="k" />
+                            <h:commandLink value="#{movie.value.name}" action="k" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.movie.producer']}" />
                             </f:facet>
-                            <h:outputText value="#{movie.producer}"/>
+                            <h:outputText value="#{movie.value.producer}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.movie.people.size']}" />
                             </f:facet>
-                            <h:outputText value="#{movie.people.size()}" />
+                            <h:outputText value="#{movie.value.people.size()}" />
                         </h:column>
                     </h:dataTable>
 
-                    <h:commandButton value="#{msg['button.label.add']}" action="createMovie" />
+                    <h:commandButton  action="/Person/edit.xhtml?faces-redirect=true" value="#{msg['button.label.add']}"/>
                 </h:form>
 
             </ui:define>

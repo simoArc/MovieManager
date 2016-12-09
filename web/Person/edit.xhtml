@@ -21,8 +21,8 @@
                         <h:outputLabel value="#{msg['page1.listName']} : " />
                         <h:inputText value="#{indexBean.person.lastName}" />
                     </h:panelGrid>
-                    <h:commandButton action="k" value="#{msg['pageEP.validate']}"/>
-                </h:form>
+                    <h:commandButton action="#{indexBean.save(indexBean.person)}" value="#{msg['pageEP.validate']}"/>
+                    </h:form>
 
                 <!--Modification personne-->
                 <h:form rendered="#{indexBean.personId != null}">
@@ -34,7 +34,7 @@
                         <h:outputLabel value="#{msg['page1.listName']} : " />
                         <h:inputText value="#{indexBean.person.lastName}" />
                     </h:panelGrid>
-                    <h:commandButton action="k" value="#{msg['pageEP.validate']}"/>
+                    <h:commandButton action="#{indexBean.save(indexBean.person)}" value="#{msg['pageEP.validate']}"/>
                 </h:form>
 
             </ui:define>
