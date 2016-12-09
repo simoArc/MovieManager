@@ -62,6 +62,20 @@
                             &nbsp;<h:commandLink action="#{indexBean.removeMovie(indexBean.person, movie.value)}"><h:graphicImage url="/resources/images/delete.png" width="24px"/></h:commandLink>
                         </h:column>
                     </h:dataTable>
+
+                    <!--Ajout film-->
+                    <h:selectOneMenu value="#{indexBean.newMovie}" >
+                        <f:converter binding="#{movieLOVConverter}" />
+                        <f:selectItems value="#{indexBean.listMovies}" var="movie" itemLabel="#{movie.name}" />
+                    </h:selectOneMenu>
+
+                    <h:commandButton action="#{indexBean.addMovie()}" value="#{msg['button.label.add']}" />
+                    <br/>
+                    <h:commandButton value="#{msg['pageEP.invalidate']}" action="/index.xhtml" immediate="true" />
+
+
+
+
                 </h:form>
 
                 <br/>

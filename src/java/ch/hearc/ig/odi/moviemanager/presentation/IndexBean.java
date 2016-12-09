@@ -9,6 +9,7 @@ import ch.hearc.ig.odi.moviemanager.business.Movie;
 import ch.hearc.ig.odi.moviemanager.business.Person;
 import ch.hearc.ig.odi.moviemanager.exception.InvalidParameterException;
 import ch.hearc.ig.odi.moviemanager.exception.NullParameterException;
+import ch.hearc.ig.odi.moviemanager.exception.UniqueException;
 import ch.hearc.ig.odi.moviemanager.service.Services;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -36,6 +38,7 @@ public class IndexBean implements Serializable {
     private Map<Long, Movie> movies;
     private Person person;
     private Long personId;
+    private Movie newMovie;
 
     public IndexBean() {
 
@@ -66,16 +69,23 @@ public class IndexBean implements Serializable {
         person = service.getPersonWithId(personId);
     }
 
-   /* public List<Movie> getMoviesList() {
-        return service.getMoviesList();
-    }*/
-        public ArrayList<Map.Entry<Long, Movie>> getMovies() {
+    public Movie getNewMovie() {
+        return newMovie;
+    }
+
+    public void setNewMovie(Movie newMovie) {
+        this.newMovie = newMovie;
+    }
+
+    
+    public ArrayList<Map.Entry<Long, Movie>> getMovies() {
         ArrayList<Map.Entry<Long, Movie>> list = new ArrayList<>(movies.entrySet());
         return list;
     }
 
     /**
-     * Initialisation de l'id passé en paramètre url avec l'id de la personne concernée
+     * Initialisation de l'id passé en paramètre url avec l'id de la personne
+     * concernée
      */
     public void initPerson() {
         String idParam = FacesContext
@@ -92,18 +102,50 @@ public class IndexBean implements Serializable {
         ArrayList<Map.Entry<Long, Person>> list = new ArrayList<>(people.entrySet());
         return list;
     }
-    
-    public void removeMovie(Person person, Movie movie){
+
+    /**
+     * Suppression d'un film sur une personne, efface aussi la personne lié au
+     * film
+     *
+     * @param person
+     * @param movie
+     */
+    public void removeMovie(Person person, Movie movie) {
         try {
             service.removeMovieFromPerson(person, movie);
         } catch (NullParameterException | InvalidParameterException ex) {
             Logger.getLogger(IndexBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public String save(Person person) throws NullParameterException{
+
+    public String save(Person person) throws NullParameterException {
         service.savePerson(person);
         return "/index.xhtml?faces-redirect=true";
+
+    }
+
+    /**
+     * Utilisation de la liste déroulante pour l'ajout de film à une personne
+     */
+    public void addMovie() {
+        try {
+            service.addMovieToPerson(person, newMovie);
+
+        } catch (NullParameterException | UniqueException ex) {
+            Logger.getLogger(IndexBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Retourne la liste de film n'étant pas déjà chez la personne
+     * @return liste de films disponible
+     */
+     public List<Movie> getListMovies(){
+        List<Movie> listMovies = new ArrayList(service.getMoviesList());
         
+            for(Map.Entry<Long, Movie> moviePerson : person.getMovies()){
+                listMovies.remove(moviePerson.getValue());
+            }
+        return listMovies;
     }
 }
