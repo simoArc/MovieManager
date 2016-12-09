@@ -68,7 +68,9 @@
                             <f:facet name="header">
                                 <h:outputText value="#{msg['page1.movie.name']}" />
                             </f:facet>
-                            <h:commandLink value="#{movie.value.name}" action="k" />
+                            <h:link outcome="/Movie/details.xhtml" value="#{movie.value.name}">
+                                <f:param name="id" value="#{movie.key}"/>
+                            </h:link>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

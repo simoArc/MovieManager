@@ -30,6 +30,10 @@ public class Movie implements Serializable {
         people = new HashMap();
     }
 
+    public Movie() {
+        people = new HashMap();
+    }
+
     public Long getId() {
         return id;
     }

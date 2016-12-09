@@ -38,6 +38,9 @@ public class IndexBean implements Serializable {
     private Map<Long, Movie> movies;
     private Person person;
     private Long personId;
+    private Movie movie;
+    private Long movieId;
+    
     private Movie newMovie;
 
     public IndexBean() {
@@ -69,6 +72,24 @@ public class IndexBean implements Serializable {
         person = service.getPersonWithId(personId);
     }
 
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public Long getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
+        movie = service.getMovieWithId(movieId);
+    }
+    
+
     public Movie getNewMovie() {
         return newMovie;
     }
@@ -97,6 +118,19 @@ public class IndexBean implements Serializable {
             person = service.getPersonWithId(personId);
         }else{
             person = new Person();
+        }
+    }
+    
+    public void initMovie() {
+        String idParam = FacesContext
+                .getCurrentInstance()
+                .getExternalContext()
+                .getRequestParameterMap().get("id");
+        if (!(idParam == null || idParam.isEmpty())) {
+            movieId = new Long(idParam);
+            movie = service.getMovieWithId(movieId);
+        }else{
+            movie = new Movie();
         }
     }
 

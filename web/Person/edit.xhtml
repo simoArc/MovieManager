@@ -22,6 +22,7 @@
                         <h:inputText value="#{indexBean.person.lastName}" />
                     </h:panelGrid>
                     <h:commandButton action="#{indexBean.save(indexBean.person)}" value="#{msg['pageEP.validate']}"/>
+                    <h:commandButton action="/index.xhtml?faces-redirect=true" value="#{msg['pageEP.invalidate']}"/>
                     </h:form>
 
                 <!--Modification personne-->
@@ -35,6 +36,7 @@
                         <h:inputText value="#{indexBean.person.lastName}" />
                     </h:panelGrid>
                     <h:commandButton action="#{indexBean.save(indexBean.person)}" value="#{msg['pageEP.validate']}"/>
+                    <h:commandButton action="/index.xhtml?faces-redirect=true" value="#{msg['pageEP.invalidate']}"/>
                 </h:form>
 
             </ui:define>
